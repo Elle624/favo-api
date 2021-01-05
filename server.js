@@ -1,10 +1,11 @@
-const { request, response } = require('express');
 const express = require('express');
+const cors = require('cors');
 const app = express();
-const iVolunteerData = require('./ivolunteerData')
+const iVolunteerData = require('./ivolunteerData');
 
 app.set('port', process.env.PORT || 3001); 
 app.use(express.json());
+app.use(cors());
 app.locals.title = 'iVolunteer API';
 app.locals.users = iVolunteerData.users;
 app.locals.events = iVolunteerData.events;
@@ -33,13 +34,31 @@ app.get('/events/:id', (request, response) => {
 app.post('/users/:id', (request, response) => {
   const { id } = request.params;
   const registeredJob = request.body;
-  console.log(id)
   const correctUser = app.locals.users.find(user => user.id === parseInt(id));
-  
-  if(correctUser) {
+  const { eventName, positionName, date } = registeredJob;
+
+  if (correctUser && registeredJob.id && eventName && positionName && date) {
     correctUser.upcomingJobs.push(registeredJob);
     response.status(200).json(`The ${correctUser.name} has registered for ${registeredJob.positionName}`)
   } else {
-    response.status(200).json('Please make sure the user id is correct')
+    response.status(200).json('Please make sure the user id and all position info are correct')
   } 
+})
+
+app.patch('/events/:id', (request, response) => {
+  const { id } = request.params;
+  const eventUpdate = request.body;
+
+  const correctEvent = app.locals.events.find(event => event.id === id);
+  const correctPosting = correctEvent.openJobs.find(job => job.id === eventUpdate.jobId);
+
+  if (correctEvent && correctPosting) {
+    const updatedCorrectOpenJobs = correctEvent.openJobs.map( openJob => openJob.id === eventUpdate.jobId ? {...openJob, numberOfSpots: correctPosting.numberOfSpots - 1} : openJob )
+    const updatedEvents = app.locals.events.map(event => event.id === id ? {...event, openJobs: updatedCorrectOpenJobs} : event);
+    app.locals.events = updatedEvents;
+
+    response.status(200).json(`The ${correctPosting.name} in ${correctEvent.name} has been updated`);
+  } else {
+    response.status(200).json('Please make sure the event or posting id is correct')
+  }
 })
