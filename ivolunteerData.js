@@ -1,5 +1,5 @@
-const ivolunteerData = {
-  user: [
+const iVolunteerData = {
+  users: [
     {
       id: 1,
       name: "CEO",
@@ -249,3 +249,5 @@ const ivolunteerData = {
     }
   ]
 }
+
+module.exports = iVolunteerData;
