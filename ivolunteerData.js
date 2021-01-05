@@ -13,7 +13,7 @@ const iVolunteerData = {
           positionName: 'dog walkers',
           date: '2021/03/01'
         }
-      ], 
+      ]
     }
   ],
   events: [
