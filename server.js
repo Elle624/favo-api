@@ -36,8 +36,9 @@ app.post('/users/:id', (request, response) => {
   const registeredJob = request.body;
   const correctUser = app.locals.users.find(user => user.id === parseInt(id));
   const { eventName, positionName, date } = registeredJob;
+  const signedUpEvent = correctUser.upcomingJobs.find(job => job.eventName === eventName)
 
-  if (correctUser && registeredJob.id && eventName && positionName && date) {
+  if (correctUser && registeredJob.id && eventName && positionName && date && !signedUpEvent) {
     correctUser.upcomingJobs.push(registeredJob);
     response.status(200).json(`The ${correctUser.name} has registered for ${registeredJob.positionName}`)
   } else {
@@ -53,7 +54,13 @@ app.patch('/events/:id', (request, response) => {
   const correctPosting = correctEvent.openJobs.find(job => job.id === eventUpdate.jobId);
 
   if (correctEvent && correctPosting) {
-    const updatedCorrectOpenJobs = correctEvent.openJobs.map( openJob => openJob.id === eventUpdate.jobId ? {...openJob, numberOfSpots: correctPosting.numberOfSpots - 1} : openJob )
+    const updatedCorrectOpenJobs = correctEvent.openJobs.map( openJob => {
+      if (openJob.id === eventUpdate.jobId && correctPosting.numberOfSpots > 0) {
+        return {...openJob, numberOfSpots: correctPosting.numberOfSpots - 1}
+      } else {
+        return openJob
+      }
+    })
     const updatedEvents = app.locals.events.map(event => event.id === id ? {...event, openJobs: updatedCorrectOpenJobs} : event);
     app.locals.events = updatedEvents;
 
