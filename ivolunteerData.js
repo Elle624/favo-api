@@ -238,7 +238,7 @@ const iVolunteerData = {
       location: '1 Cat Dr., Denver, CO',
       description: 'Help our local animal shelter by walking dogs and spending time with cats',
       duration: 3,
-      category: 'animal',
+      category: 'Animal',
       openJobs: [
         {
           id: 'posting-22',
