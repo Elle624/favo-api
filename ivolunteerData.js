@@ -278,7 +278,7 @@ const iVolunteerData = {
       id: 'event-12',
       date: '2021/05/17',
       name: 'Food Donation Drive',
-      organization: '',
+      organization: 'Individual',
       location: '6 foodtruck Dr., Denver, CO',
       description: 'We are distributing food to people in need.',
       duration: 8,
