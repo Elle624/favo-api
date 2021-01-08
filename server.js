@@ -38,7 +38,7 @@ app.post('/users/:id', (request, response) => {
   const { eventName, positionName, date } = registeredJob;
   const signedUpEvent = correctUser.upcomingJobs.find(job => job.eventName === eventName)
 
-  if (correctUser && registeredJob.id && eventName && positionName && date && !signedUpEvent) {
+  if (correctUser && registeredJob.id && registeredJob.eventId && eventName && positionName && date && !signedUpEvent) {
     correctUser.upcomingJobs.push(registeredJob);
     response.status(200).json(`The ${correctUser.name} has registered for ${registeredJob.positionName}`)
   } else {
