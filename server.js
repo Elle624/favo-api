@@ -44,14 +44,12 @@ app.delete('/events/:id', (request, response) => {
     app.locals.events.forEach(event => {
       event.openJobs.forEach(job => {
         if (event.id === eventId && job.id === positionId) {
-          job.numberOfSpots += 1
-
+          job.numberOfSpots += 1;
           jobList.forEach((job, index) => {
             if (job.id === jobId) {
               jobList.splice(index, 1)
             }
           });
-          
           response.status(201).json(`${job.name} has been removed from your job list!`)
         }
       })
@@ -91,6 +89,7 @@ app.patch('/events/:id', (request, response) => {
       }
     })
     const updatedEvents = app.locals.events.map(event => event.id === id ? {...event, openJobs: updatedCorrectOpenJobs} : event);
+    
     app.locals.events = updatedEvents;
 
     response.status(200).json(`The ${correctPosting.name} in ${correctEvent.name} has been updated`);
