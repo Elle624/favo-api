@@ -31,6 +31,33 @@ app.get('/events/:id', (request, response) => {
   response.json(event);
 })
 
+app.delete('/events/:id', (request, response) => {
+  //body = {eventId: 'event-10', jobId: '1-posting-23'}
+  const { id } = request.params;
+  const registeredJob = request.body;
+  const { eventId, jobId } = registeredJob;
+  const jobList = app.locals.users[0].upcomingJobs;
+  const positionId = jobId.split('-').slice(1).join('-');
+  const isSignedUp = jobList.find(job => job.id === jobId)
+
+  if (isSignedUp) {
+    app.locals.events.forEach(event => {
+      event.openJobs.forEach(job => {
+        if (event.id === eventId && job.id === positionId) {
+          job.numberOfSpots += 1;
+          jobList.forEach((job, index) => {
+            if (job.id === jobId) {
+              jobList.splice(index, 1)
+            }
+          });
+          response.status(201).json(`${job.name} has been removed from your job list!`)
+        }
+      })
+    })
+  }
+  response.status(201).json('Can not find any matching job in your list, please try again!');
+})
+
 app.post('/users/:id', (request, response) => {
   const { id } = request.params;
   const registeredJob = request.body;
@@ -38,7 +65,7 @@ app.post('/users/:id', (request, response) => {
   const { eventName, positionName, date } = registeredJob;
   const signedUpEvent = correctUser.upcomingJobs.find(job => job.eventName === eventName)
 
-  if (correctUser && registeredJob.id && eventName && positionName && date && !signedUpEvent) {
+  if (correctUser && registeredJob.id && registeredJob.eventId && eventName && positionName && date && !signedUpEvent) {
     correctUser.upcomingJobs.push(registeredJob);
     response.status(200).json(`The ${correctUser.name} has registered for ${registeredJob.positionName}`)
   } else {
@@ -62,6 +89,7 @@ app.patch('/events/:id', (request, response) => {
       }
     })
     const updatedEvents = app.locals.events.map(event => event.id === id ? {...event, openJobs: updatedCorrectOpenJobs} : event);
+    
     app.locals.events = updatedEvents;
 
     response.status(200).json(`The ${correctPosting.name} in ${correctEvent.name} has been updated`);
