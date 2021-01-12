@@ -1,8 +1,8 @@
-# **iVolunteer-API**
+# **Favo-API**
 
-### [iVolunteer]()
-### [iVolunteer-Repo](https://github.com/Elle624/ivolunteer)
-### [iVolunteer-API](https://github.com/Elle624/ivolunteer-api)
+### [Favo]()
+### [Favo-Repo](https://github.com/Elle624/ivolunteer)
+### [Favo-API](https://github.com/Elle624/ivolunteer-api)
 
 ### [Link To Our Project Description](https://frontend.turing.io/projects/module-3/stretch.html)
 
@@ -10,7 +10,7 @@
 
 ## **Purpose**
 
-To be used with the iVolunteer project
+To be used with the Favo project
 
 ---
 
