@@ -2,9 +2,9 @@ const iVolunteerData = {
   users: [
     {
       id: 1,
-      name: "Wheezy Joe",
+      name: "Katy Terance",
       rating: 4.4,
-      profilePicture: 'https://randomuser.me/api/portraits/men/52.jpg',
+      profilePicture: 'https://randomuser.me/api/portraits/women/27.jpg',
       volunteeredHours: 10.2,
       upcomingJobs: [
         {
