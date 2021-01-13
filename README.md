@@ -1,8 +1,8 @@
 # **Favo-API**
 
-### [Favo]()
-### [Favo-Repo](https://github.com/Elle624/ivolunteer)
-### [Favo-API](https://github.com/Elle624/ivolunteer-api)
+### [Favo](https://favo.vercel.app)
+### [Favo-Repo](https://github.com/Elle624/favo)
+### [Favo-API](https://github.com/Elle624/favo-api)
 
 ### [Link To Our Project Description](https://frontend.turing.io/projects/module-3/stretch.html)
 
@@ -43,9 +43,9 @@ Sample response (200):
 [
     {
       id: 1,
-      name: "Wheezy Joe",
+      name: "Katy Terance",
       rating: 4.4,
-      profilePicture: 'https://randomuser.me/api/portraits/men/52.jpg',
+      profilePicture: 'https://randomuser.me/api/portraits/women/27.jpg',
       volunteeredHours: 10.2,
       upcomingJobs: [
         {
