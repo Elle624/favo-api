@@ -14,6 +14,32 @@ const iVolunteerData = {
           positionName: 'dog walkers',
           date: '2021/03/01'
         }
+      ],
+      completedJobs: [
+        {
+          id: '1-posting-97',
+          eventId: 'event-97',
+          eventName: 'Vet Clinic',
+          positionName: 'clerk',
+          date: '2020/04/01',
+          duration: 6
+        },
+        {
+          id: '1-posting-98',
+          eventId: 'event-98',
+          eventName: 'Provide food for homeless',
+          positionName: 'delivery',
+          date: '2020/06/15',
+          duration: 2.2
+        },
+        {
+          id: '1-posting-99',
+          eventId: 'event-99',
+          eventName: 'Senior Home Thanksgiving',
+          positionName: 'delivery',
+          date: '2020/11/24',
+          duration: 2
+        }
       ]
     }
   ],
